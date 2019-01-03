@@ -44,7 +44,9 @@ files =
  rtl/verilog/wb_intercon.vh
  rtl/verilog/wb_intercon_dbg.vh
  sw/clear_r3_and_jump_to_0x100.vh
- sw/spi_uimage_loader.vh
+ sw/Makefile
+ sw/spi_uimage_loader.S
+ sw/wb_rom_gen.py
 file_type = verilogSource
 is_include_file = true
 
@@ -86,3 +88,5 @@ description = Initial SPI Flash contents (in Verilog hex format)
 paramtype   = vlogparam
 scope       = private
 
+[scripts]
+pre_synth_scripts = gen_bootloader.sh

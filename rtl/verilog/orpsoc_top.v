@@ -78,23 +78,23 @@ module orpsoc_top #(
 	inout		i2c1_sda_io,
 	inout		i2c1_scl_io,
 
-    output          spi0_sck_o,
-    output          spi0_mosi_o,
-    input           spi0_miso_i,
-    output          spi0_ss_o,
+	output		spi0_sck_o,
+	output		spi0_mosi_o,
+	input		spi0_miso_i,
+	output		spi0_ss_o,
 
-    output          spi1_sck_o,
-    output          spi1_mosi_o,
-    input           spi1_miso_i,
-    output          spi1_ss_o,
+	output		spi1_sck_o,
+	output		spi1_mosi_o,
+	input		spi1_miso_i,
+	output		spi1_ss_o,
 
-    output          spi2_sck_o,
-    output          spi2_mosi_o,
-    input           spi2_miso_i,
-    output          spi2_ss_o,
+	output		spi2_sck_o,
+	output		spi2_mosi_o,
+	input		spi2_miso_i,
+	output		spi2_ss_o,
 
-    output          accelerometer_cs_o,
-    input           accelerometer_irq_i
+	output		accelerometer_cs_o,
+	input		accelerometer_irq_i
 );
 
 parameter	IDCODE_VALUE = 32'h14951185;
@@ -316,21 +316,25 @@ or1200_top0 (
 
 `ifdef MOR1KX
 mor1kx #(
-	.FEATURE_DEBUGUNIT("ENABLED"),
-	.FEATURE_CMOV("ENABLED"),
-	.FEATURE_INSTRUCTIONCACHE("ENABLED"),
-	.OPTION_ICACHE_BLOCK_WIDTH(5),
-	.OPTION_ICACHE_SET_WIDTH(8),
-	.OPTION_ICACHE_WAYS(2),
-	.OPTION_ICACHE_LIMIT_WIDTH(32),
-	.FEATURE_IMMU("ENABLED"),
-	.FEATURE_DATACACHE("ENABLED"),
-	.OPTION_DCACHE_BLOCK_WIDTH(5),
-	.OPTION_DCACHE_SET_WIDTH(8),
-	.OPTION_DCACHE_WAYS(2),
-	.OPTION_DCACHE_LIMIT_WIDTH(31),
-	.FEATURE_DMMU("ENABLED"),
-	.OPTION_PIC_TRIGGER("LATCHED_LEVEL"),
+	.FEATURE_DEBUGUNIT		("ENABLED"),
+	.FEATURE_CMOV			("ENABLED"),
+	.FEATURE_IMMU			("ENABLED"),
+	.FEATURE_DMMU			("ENABLED"),
+
+	.FEATURE_INSTRUCTIONCACHE	("ENABLED"),
+	.OPTION_ICACHE_BLOCK_WIDTH	(5),
+	.OPTION_ICACHE_SET_WIDTH	(7),
+	.OPTION_ICACHE_WAYS		(1),
+	.OPTION_ICACHE_LIMIT_WIDTH	(32),
+
+	.FEATURE_DATACACHE		("ENABLED"),
+	.OPTION_DCACHE_BLOCK_WIDTH	(5),
+	.OPTION_DCACHE_SET_WIDTH	(7),
+	.OPTION_DCACHE_WAYS		(1),
+	.OPTION_DCACHE_LIMIT_WIDTH	(31),
+
+	.OPTION_RF_NUM_SHADOW_GPR	(15),
+	.OPTION_PIC_TRIGGER		("LATCHED_LEVEL"),
 
 	.IBUS_WB_TYPE("B3_REGISTERED_FEEDBACK"),
 	.DBUS_WB_TYPE("B3_REGISTERED_FEEDBACK"),
@@ -367,24 +371,6 @@ mor1kx #(
 	.dwbm_ack_i(wb_s2m_or1k_d_ack),
 	.dwbm_dat_i(wb_s2m_or1k_d_dat),
 	.dwbm_rty_i(wb_s2m_or1k_d_rty),
-
-	.avm_d_address_o (),
-	.avm_d_byteenable_o (),
-	.avm_d_read_o (),
-	.avm_d_readdata_i (32'h00000000),
-	.avm_d_burstcount_o (),
-	.avm_d_write_o (),
-	.avm_d_writedata_o (),
-	.avm_d_waitrequest_i (1'b0),
-	.avm_d_readdatavalid_i (1'b0),
-
-	.avm_i_address_o (),
-	.avm_i_byteenable_o (),
-	.avm_i_read_o (),
-	.avm_i_readdata_i (32'h00000000),
-	.avm_i_burstcount_o (),
-	.avm_i_waitrequest_i (1'b0),
-	.avm_i_readdatavalid_i (1'b0),
 
 	.irq_i(or1k_irq),
 
@@ -481,8 +467,8 @@ adbg_top dbg_if0 (
 //
 ////////////////////////////////////////////////////////////////////////
 
-   localparam WB_BOOTROM_MEM_DEPTH = 1024;
-   
+localparam WB_BOOTROM_MEM_DEPTH = 1024;
+
 wb_bootrom
   #(.DEPTH (WB_BOOTROM_MEM_DEPTH),
     .MEMFILE (bootrom_file))
@@ -498,7 +484,7 @@ wb_bootrom
 
    assign wb_s2m_rom0_err = 1'b0;
    assign wb_s2m_rom0_rty = 1'b0;
-  
+
 ////////////////////////////////////////////////////////////////////////
 //
 // SDRAM Memory Controller
