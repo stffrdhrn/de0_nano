@@ -13,7 +13,7 @@ depend =
  >=::uart16550:1.5.5
  >=::wb_intercon:1.2
  ::wb_ram:1.1
- ::wb_sdram_ctrl:0-r2
+ ::wb_sdram_ctrl:0-r4
 
 backend = quartus
 
@@ -68,11 +68,19 @@ scope = private
 usage = sim
 
 [icarus]
-depend = elf-loader jtag_vpi-r2 mt48lc16m16a2 s25fl064p-1.7 vlog_tb_utils-1.0
+depend = >=::elf-loader:1.0
+  >=::jtag_vpi:0-r2
+  mt48lc16m16a2
+  s25fl064p-1.7
+  >=::vlog_tb_utils:1.1
 iverilog_options = -DICARUS_SIM -DSIM -DSPEEDSIM
 
 [modelsim]
-depend = elf-loader jtag_vpi-r2 mt48lc16m16a2 s25fl064p-1.7 vlog_tb_utils-1.0
+depend = >=::elf-loader:1.0
+  >=::jtag_vpi:0-r2
+  mt48lc16m16a2
+  s25fl064p-1.7
+  >=::vlog_tb_utils:1.1
 vlog_options = +define+SIM +define+MODELSIM_SIM -timescale 1ns/1ps
 vsim_options = -L altera_mf_ver -L altera_mf
 
